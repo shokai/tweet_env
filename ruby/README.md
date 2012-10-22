@@ -12,4 +12,4 @@ Run
 ---
 
     % ruby tweet_env.rb --help
-    % ruby tweet_env.rb --twitter USERNAME --port /dev/tty.usb-device-name
+    % ruby tweet_env.rb --tweet USERNAME --port /dev/tty.usb-device-name
