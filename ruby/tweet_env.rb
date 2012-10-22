@@ -15,6 +15,8 @@ end
 
 if parser[:help] or !parser[:serialport]
   STDERR.puts parser.help
+  STDERR.puts "e.g."
+  STDERR.puts "  ruby #{$0} --twitter USERNAME --port /dev/tty.usb-device-name"
   exit 1
 end
 
