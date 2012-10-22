@@ -13,12 +13,14 @@ void setup(){
 }
 
 void loop(){
-  Serial.print("light:");
-  Serial.println(get_light());
-  led_blink();
+  int light = get_light();
   delay(2000);
-  Serial.print("temp:");
-  Serial.println(get_temp());
+  double temp = get_temp();
+  Serial.print("{\"light\":");
+  Serial.print(light);
+  Serial.print(",\"temp\":");
+  Serial.print(temp);
+  Serial.println("}");
   led_blink();
   delay(2000);
 }
