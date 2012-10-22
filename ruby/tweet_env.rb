@@ -10,13 +10,14 @@ parser = ArgsParser.parse ARGV do
     fname ? "/dev/#{fname}" : nil
   )
   arg :twitter, 'twitter user name'
+  arg :tweet, 'do tweet', :default => false
   arg :help, 'show help', :alias => :h
 end
 
 if parser[:help] or !parser[:serialport]
   STDERR.puts parser.help
   STDERR.puts "e.g."
-  STDERR.puts "  ruby #{$0} --twitter USERNAME --port /dev/tty.usb-device-name"
+  STDERR.puts "  ruby #{$0} --twitter USERNAME --port /dev/tty.usb-device-name --tweet"
   exit 1
 end
 
@@ -27,17 +28,18 @@ rescue => e
   exit 1
 end
 
-client = Tw::Client.new
-client.auth parser[:twitter]
-
 loop do
   line = sp.gets.strip
   data = JSON.parse line rescue next
   next if !data['light'] or !data['temp']
   puts data.inspect
-  msg = {}
-  msg['気温'] = data['temp']
-  msg['明るさ'] = data['light']
-  client.tweet msg.to_json
+  if parser[:tweet]
+    client = Tw::Client.new
+    client.auth parser[:twitter]
+    msg = {}
+    msg['気温'] = data['temp']
+    msg['明るさ'] = data['light']
+    client.tweet msg.to_json
+  end
   break
 end
