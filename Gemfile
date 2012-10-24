@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'serialport'
+gem 'arduino_firmata'
 gem 'json'
 gem 'tw'
 gem 'args_parser'
