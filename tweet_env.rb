@@ -27,8 +27,6 @@ puts "温度 #{temp}"
 if parser.has_param? :tweet
   client = Tw::Client.new
   client.auth parser[:tweet]
-  msg = {}
-  msg['気温'] = temp
-  msg['明るさ'] = light
+  msg = { '気温' => temp, '明るさ' => light }
   client.tweet msg.to_json
 end
