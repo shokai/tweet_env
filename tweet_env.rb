@@ -17,7 +17,7 @@ if parser[:help] or !parser[:arduino]
   exit 1
 end
 
-arduino = ArduinoFirmata::Arduino.new parser[:arduino]
+arduino = ArduinoFirmata.connect parser[:arduino]
 
 light = arduino.analog_read 0
 puts "明るさ #{light}"
