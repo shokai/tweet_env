@@ -30,3 +30,5 @@ if parser.has_param? :tweet
   msg = { '気温' => temp, '明るさ' => light }
   client.tweet msg.to_json
 end
+
+arduino.close
